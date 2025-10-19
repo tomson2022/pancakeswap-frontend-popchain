@@ -1,0 +1,54 @@
+{
+  "name": "PopChain Default List",
+  "timestamp": "2025-09-19T12:00:00Z",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "https://popchain.ai/logo.png",
+  "keywords": ["popchain", "default"],
+  "tokens": [
+    {
+      "name": "Wrapped POP",
+      "symbol": "WPOP",
+      "address": "0x11c44AED3d69152486D92B3161696FcF38F84dB8",
+      "chainId": 7257,
+      "decimals": 18,
+      "logoURI": "/images/tokens/wpop.png"
+    },
+    {
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "address": "0xC6003142FD16Ad0b0A33B840173867CcDc2F4EC3",
+      "chainId": 7257,
+      "decimals": 18,
+      "logoURI": "/images/tokens/usdt.png"
+    },
+    {
+      "name": "Luma Protocol",
+      "symbol": "LUMA",
+      "address": "0x5A108a944712A06E940cfe9590427190552d3957",
+      "chainId": 7257,
+      "decimals": 18,
+      "logoURI": "/images/tokens/luma.png"
+    },
+    {
+      "name": "Wrapped POP",
+      "symbol": "WPOP",
+      "address": "0x897FE3AFf41Dc5174504361926576ed2e5173F8D",
+      "chainId": 16042,
+      "decimals": 18,
+      "logoURI": "/images/tokens/wpop.png"
+    },
+    {
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "address": "0x7faD4D267eD3820152afe42A99a2b95797504fA7",
+      "chainId": 16042,
+      "decimals": 6,
+      "logoURI": "/images/tokens/usdt.png"
+    }
+  ]
+}
