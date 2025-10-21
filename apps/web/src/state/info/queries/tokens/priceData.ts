@@ -9,14 +9,28 @@ import { MultiChainName, multiChainQueryEndPoint, multiChainQueryMainToken } fro
 
 const getPriceSubqueries = (chainName: MultiChainName, tokenAddress: string, blocks: any) =>
   blocks.map(
-    (block: any) => `
-      t${block.timestamp}:token(id:"${tokenAddress}", block: { number: ${block.number} }) {
-        derived${multiChainQueryMainToken[chainName]}
+    (block: any) => {
+      // PopChain 使用 Uniswap V2 schema，只有 derivedETH 字段，沒有 derivedPOP 和 popPrice
+      if (chainName === 'POPCHAIN') {
+        return `
+          t${block.timestamp}:token(id:"${tokenAddress}", block: { number: ${block.number} }) {
+            derivedETH
+          }
+          b${block.timestamp}: bundle(id:"1", block: { number: ${block.number} }) {
+            ethPrice
+          }
+        `
       }
-      b${block.timestamp}: bundle(id:"1", block: { number: ${block.number} }) {
-        ${multiChainQueryMainToken[chainName].toLowerCase()}Price
-      }
-    `,
+      
+      return `
+        t${block.timestamp}:token(id:"${tokenAddress}", block: { number: ${block.number} }) {
+          derived${multiChainQueryMainToken[chainName]}
+        }
+        b${block.timestamp}: bundle(id:"1", block: { number: ${block.number} }) {
+          ${multiChainQueryMainToken[chainName].toLowerCase()}Price
+        }
+      `
+    }
   )
 
 /**
@@ -72,24 +86,26 @@ const fetchTokenPriceData = async (
       }
     }
 
-    // format token BNB price results
+    // format token price results
     const tokenPrices: {
       timestamp: string
-      derivedBNB: number
+      derivedMainToken: number
       priceUSD: number
     }[] = []
 
     const mainToken = multiChainQueryMainToken[chainName]
 
-    // Get Token prices in BNB
+    // Get Token prices in main token (BNB/ETH/POP)
     Object.keys(prices).forEach((priceKey) => {
       const timestamp = priceKey.split('t')[1]
-      // if its BNB price e.g. `b123` split('t')[1] will be undefined and skip BNB price entry
+      // if its main token price e.g. `b123` split('t')[1] will be undefined and skip main token price entry
       if (timestamp) {
+        // PopChain 使用 derivedETH，其他鏈使用 derived${mainToken}
+        const derivedField = chainName === 'POPCHAIN' ? 'derivedETH' : `derived${mainToken}`
         tokenPrices.push({
           timestamp,
-          derivedBNB: prices[priceKey]?.[`derived${mainToken}`]
-            ? parseFloat(prices[priceKey][`derived${mainToken}`])
+          derivedMainToken: prices[priceKey]?.[derivedField]
+            ? parseFloat(prices[priceKey][derivedField])
             : 0,
           priceUSD: 0,
         })
@@ -98,16 +114,18 @@ const fetchTokenPriceData = async (
 
     console.warn('pricesPart1', tokenPrices)
 
-    // Go through BNB USD prices and calculate Token price based on it
+    // Go through main token USD prices and calculate Token price based on it
     Object.keys(prices).forEach((priceKey) => {
       const timestamp = priceKey.split('b')[1]
       // if its Token price e.g. `t123` split('b')[1] will be undefined and skip Token price entry
       if (timestamp) {
         const tokenPriceIndex = tokenPrices.findIndex((tokenPrice) => tokenPrice.timestamp === timestamp)
         if (tokenPriceIndex >= 0) {
-          const { derivedBNB } = tokenPrices[tokenPriceIndex]
+          const { derivedMainToken } = tokenPrices[tokenPriceIndex]
+          // PopChain 使用 ethPrice，其他鏈使用 ${mainToken.toLowerCase()}Price
+          const priceField = chainName === 'POPCHAIN' ? 'ethPrice' : `${mainToken.toLowerCase()}Price`
           tokenPrices[tokenPriceIndex].priceUSD =
-            parseFloat(prices[priceKey]?.[`${mainToken.toLowerCase()}Price`] ?? 0) * derivedBNB
+            parseFloat(prices[priceKey]?.[priceField] ?? 0) * derivedMainToken
         }
       }
     })

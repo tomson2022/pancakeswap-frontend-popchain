@@ -49,7 +49,7 @@ const TOKEN_AT_BLOCK = (chainName: MultiChainName, block: number | undefined, to
   const addressesString = `["${tokens.join('","')}"]`
   const blockString = block ? `block: {number: ${block}}` : ``
   
-  // PopChain 使用 Uniswap V2 schema，字段略有不同
+  // PopChain 使用 Uniswap V2 schema，只有 derivedETH 字段
   if (chainName === 'POPCHAIN') {
     return `tokens(
         where: {id_in: ${addressesString}}
