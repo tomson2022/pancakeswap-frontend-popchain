@@ -69,7 +69,7 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
           content="Advanced DeFi exchange on PopChain. Discover PopChainSwap, the leading DEX with secure trading, liquidity pools, and yield farming opportunities."
         />
         <meta name="theme-color" content="#1FC7D4" />
-        <meta name="twitter:image" content="/images/hero.jpg" />
+        <meta name="twitter:image" content="https://luma-img.oss-cn-hongkong.aliyuncs.com/hero.jpg" />
         <meta
           name="twitter:description"
           content="The most popular AMM on PopChain! Secure trading, liquidity provision, and DeFi features on a platform you can trust."

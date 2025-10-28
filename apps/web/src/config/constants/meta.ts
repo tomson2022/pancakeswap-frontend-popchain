@@ -6,7 +6,7 @@ export const DEFAULT_META: PageMeta = {
   title: 'PopChainSwap',
   description:
     'The most popular AMM on PopChain! Earn tokens through yield farming and liquidity provision. Advanced DeFi exchange with secure trading, liquidity pools, and more features on a platform you can trust.',
-  image: '/images/hero.jpg',
+  image: 'https://luma-img.oss-cn-hongkong.aliyuncs.com/hero.jpg',
 }
 
 interface PathList {
