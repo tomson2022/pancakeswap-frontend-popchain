@@ -479,7 +479,11 @@ export function usePairAdder(): (pair: Pair) => void {
  * @param tokenB the other token
  */
 export function toV2LiquidityToken([tokenA, tokenB]: [ERC20Token, ERC20Token]): ERC20Token {
-  return new ERC20Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'Cake-LP', 'Pancake LPs')
+  // Get LP token name based on chain ID
+  // PopChain uses "LP Token", other chains may use "Pancake LPs"
+  const lpTokenName =
+    tokenA.chainId === ChainId.POPCHAIN || tokenA.chainId === ChainId.POPCHAIN_TESTNET ? 'LP Token' : 'Pancake LPs'
+  return new ERC20Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'Cake-LP', lpTokenName)
 }
 
 /**

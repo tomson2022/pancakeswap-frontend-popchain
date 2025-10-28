@@ -18,12 +18,24 @@ import { keccak256, pack } from '@ethersproject/solidity'
 import JSBI from 'jsbi'
 import invariant from 'tiny-invariant'
 
-import { FACTORY_ADDRESS_MAP, INIT_CODE_HASH_MAP } from '../constants'
+import { FACTORY_ADDRESS_MAP, INIT_CODE_HASH_MAP, ChainId } from '../constants'
 import { ERC20Token } from './token'
 
 let PAIR_ADDRESS_CACHE: { [key: string]: string } = {}
 
 const composeKey = (token0: ERC20Token, token1: ERC20Token) => `${token0.chainId}-${token0.address}-${token1.address}`
+
+/**
+ * Get LP token name based on chain ID
+ * PopChain uses "LP Token", other chains may use "Pancake LPs"
+ */
+function getLPTokenName(chainId: number): string {
+  if (chainId === ChainId.POPCHAIN || chainId === ChainId.POPCHAIN_TESTNET) {
+    return 'LP Token'
+  }
+  // Keep "Pancake LPs" for backward compatibility with BSC and other chains
+  return 'Pancake LPs'
+}
 
 export const computePairAddress = ({
   factoryAddress,
@@ -53,6 +65,7 @@ export const computePairAddress = ({
 
 export class Pair {
   public readonly liquidityToken: ERC20Token
+
   private readonly tokenAmounts: [CurrencyAmount<ERC20Token>, CurrencyAmount<ERC20Token>]
 
   public static getAddress(tokenA: ERC20Token, tokenB: ERC20Token): string {
@@ -68,7 +81,7 @@ export class Pair {
       Pair.getAddress(tokenAmounts[0].currency, tokenAmounts[1].currency),
       18,
       'Cake-LP',
-      'Pancake LPs'
+      getLPTokenName(tokenAmounts[0].currency.chainId)
     )
     this.tokenAmounts = tokenAmounts as [CurrencyAmount<ERC20Token>, CurrencyAmount<ERC20Token>]
   }
@@ -207,7 +220,7 @@ export class Pair {
     token: ERC20Token,
     totalSupply: CurrencyAmount<ERC20Token>,
     liquidity: CurrencyAmount<ERC20Token>,
-    feeOn: boolean = false,
+    feeOn = false,
     kLast?: BigintIsh
   ): CurrencyAmount<ERC20Token> {
     invariant(this.involvesToken(token), 'TOKEN')

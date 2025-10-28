@@ -164,19 +164,14 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
       throw new Error('missing liquidity amount')
     }
 
-    // PopChain uses standard Uniswap Router which doesn't support permit functions
-    // Skip permit attempt and directly use approve
-    const isPopChain = chainId === ChainId.POPCHAIN || chainId === ChainId.POPCHAIN_TESTNET
-    if (isPopChain) {
-      approveCallback()
-      return
-    }
-
     // Check if contract supports permit by trying to call nonces
     // If nonces call fails, the contract doesn't support permit, fallback to approve
     let nonce
+    let tokenName
     try {
       nonce = await pairContractRead.nonces(account)
+      // Get the actual token name from the contract for EIP-712 domain
+      tokenName = await pairContractRead.name()
     } catch (nonceError) {
       // Contract doesn't support permit, use standard approve
       approveCallback()
@@ -190,7 +185,7 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
       { name: 'verifyingContract', type: 'address' },
     ]
     const domain = {
-      name: 'Pancake LPs',
+      name: tokenName,
       version: '1',
       chainId,
       verifyingContract: pair.liquidityToken.address,
@@ -422,11 +417,15 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
       }
     }
     // we have a signature, use permit versions of remove liquidity
-    // Note: PopChain uses standard Uniswap Router which doesn't support permit functions
-    else if (signatureData !== null && !isPopChain) {
+    else if (signatureData !== null) {
       // removeLiquidityETHWithPermit
       if (oneCurrencyIsNative) {
-        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
+        // PopChain uses standard Uniswap Router, which doesn't support SupportingFeeOnTransferTokens functions
+        if (isPopChain) {
+          methodNames = ['removeLiquidityETHWithPermit']
+        } else {
+          methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
+        }
         args = [
           currencyBIsNative ? tokenA.address : tokenB.address,
           liquidityAmount.quotient.toString(),
@@ -457,10 +456,6 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
           signatureData.s,
         ]
       }
-    } else if (signatureData !== null && isPopChain) {
-      // PopChain doesn't support permit, fallback to approve
-      toastError(t('Error'), t('PopChain Router does not support permit. Please use approve instead.'))
-      throw new Error('PopChain Router does not support permit functions')
     } else {
       toastError(t('Error'), t('Attempting to confirm without approval or a signature'))
       throw new Error('Attempting to confirm without approval or a signature')

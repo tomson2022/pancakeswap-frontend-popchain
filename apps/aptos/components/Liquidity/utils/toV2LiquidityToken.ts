@@ -6,5 +6,7 @@ import { Pair, Coin } from '@pancakeswap/aptos-swap-sdk'
  * @param tokenB the other token
  */
 export default function toV2LiquidityToken([tokenA, tokenB]: [Coin, Coin]): Coin {
-  return new Coin(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'Cake-LP', 'Pancake LPs')
+  // Use Pair.getLiquidityToken to get consistent naming with Pair constructor
+  // This generates names like "Pancake-${token0.symbol}-${token1.symbol}-LP"
+  return Pair.getLiquidityToken(tokenA, tokenB)
 }
