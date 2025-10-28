@@ -132,6 +132,17 @@ export default function RemoveStableLiquidity({ currencyA, currencyB, currencyId
 
   async function onRemove() {
     if (!chainId || !account) throw new Error('missing dependencies')
+    
+    // Check approval state first - this is critical to prevent unauthorized transactions
+    if (approval !== ApprovalState.APPROVED) {
+      if (approval === ApprovalState.UNKNOWN) {
+        toastError(t('Error'), t('Please enable liquidity removal first'))
+      } else {
+        toastError(t('Error'), t('Please approve liquidity removal first'))
+      }
+      throw new Error('Attempting to remove liquidity without approval')
+    }
+    
     const { [Field.CURRENCY_A]: currencyAmountA, [Field.CURRENCY_B]: currencyAmountB } = parsedAmounts
     if (!currencyAmountA || !currencyAmountB) {
       toastError(t('Error'), t('Missing currency amounts'))
