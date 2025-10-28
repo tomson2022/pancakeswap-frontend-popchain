@@ -164,8 +164,16 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
       throw new Error('missing liquidity amount')
     }
 
-    // try to gather a signature for permission
-    const nonce = await pairContractRead.nonces(account)
+    // Check if contract supports permit by trying to call nonces
+    // If nonces call fails, the contract doesn't support permit, fallback to approve
+    let nonce
+    try {
+      nonce = await pairContractRead.nonces(account)
+    } catch (nonceError) {
+      // Contract doesn't support permit, use standard approve
+      approveCallback()
+      return
+    }
 
     const EIP712Domain = [
       { name: 'name', type: 'string' },
@@ -450,6 +458,49 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
       if (BigNumber.isBigNumber(safeGasEstimate)) {
         methodSafeGasEstimate = { methodName: methodNames[i], safeGasEstimate }
         break
+      }
+    }
+
+    // all estimations failed - if we were trying permit version and have approval, fallback to approve version
+    if (!methodSafeGasEstimate && signatureData !== null && approval === ApprovalState.APPROVED) {
+      setSignatureData(null) // Clear signature data
+      // Retry with approve version
+      if (oneCurrencyIsNative) {
+        methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
+        args = [
+          currencyBIsNative ? tokenA.address : tokenB.address,
+          liquidityAmount.quotient.toString(),
+          amountsMin[currencyBIsNative ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+          amountsMin[currencyBIsNative ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+          account,
+          deadline.toHexString(),
+        ]
+      } else {
+        methodNames = ['removeLiquidity']
+        args = [
+          tokenA.address,
+          tokenB.address,
+          liquidityAmount.quotient.toString(),
+          amountsMin[Field.CURRENCY_A].toString(),
+          amountsMin[Field.CURRENCY_B].toString(),
+          account,
+          deadline.toHexString(),
+        ]
+      }
+      // Retry gas estimation with approve version
+      for (let i = 0; i < methodNames.length; i++) {
+        let safeGasEstimate
+        try {
+          // eslint-disable-next-line no-await-in-loop
+          safeGasEstimate = calculateGasMargin(await routerContract.estimateGas[methodNames[i]](...args))
+        } catch (e) {
+          console.error(`estimateGas failed`, methodNames[i], args, e)
+        }
+
+        if (BigNumber.isBigNumber(safeGasEstimate)) {
+          methodSafeGasEstimate = { methodName: methodNames[i], safeGasEstimate }
+          break
+        }
       }
     }
 
