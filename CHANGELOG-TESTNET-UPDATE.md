@@ -208,18 +208,41 @@ git revert 561b6df
 
 ---
 
+## 🔄 后续更新
+
+### 更新 2: 添加测试网到网络选择器 (2025-10-30 22:15)
+
+**问题**: 网络选择器中没有显示 PopChain 测试网选项
+
+**修改内容**:
+- **文件**: `apps/web/src/components/NetworkSwitcher.tsx`
+- **改动**: 修改链过滤逻辑，允许 PopChain 测试网在网络选择器中显示
+- **代码变更**:
+  ```typescript
+  // 修改前
+  .filter((chain) => !chain.testnet || chain.id === chainId)
+  
+  // 修改后
+  .filter((chain) => !chain.testnet || chain.id === chainId || chain.id === ChainId.POPCHAIN_TESTNET)
+  ```
+
+**效果**: 用户现在可以在网络选择器中看到并切换到 PopChain 测试网
+
+---
+
 ## ✅ 完成状态
 
 - [x] 配置文件更新
 - [x] Git 提交记录
 - [x] 文档编写
+- [x] 网络选择器更新
 - [ ] 测试环境验证
 - [ ] 生产环境部署
 - [ ] 用户通知
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2025-10-30 22:05  
+**文档版本**: v1.1  
+**最后更新**: 2025-10-30 22:15  
 **维护者**: Development Team
 

@@ -41,7 +41,7 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
       </Box>
       <UserMenuDivider />
       {chains
-        .filter((chain) => !chain.testnet || chain.id === chainId)
+        .filter((chain) => !chain.testnet || chain.id === chainId || chain.id === ChainId.POPCHAIN_TESTNET)
         .map((chain) => (
           <UserMenuItem
             key={chain.id}
