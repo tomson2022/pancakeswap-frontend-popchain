@@ -18,7 +18,9 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_POPCHAIN }: { 
   const [dismissWrongNetwork, setDismissWrongNetwork] = useAtom(hideWrongNetworkModalAtom)
 
   const isPopChainOnlyPage = useMemo(() => {
-    return pageSupportedChains?.length === 1 && pageSupportedChains[0] === ChainId.POPCHAIN
+    // 检查页面是否只支持 PopChain（主网和/或测试网）
+    const popChainIds = [ChainId.POPCHAIN, ChainId.POPCHAIN_TESTNET]
+    return pageSupportedChains?.every(id => popChainIds.includes(id))
   }, [pageSupportedChains])
 
   const isPageNotSupported = useMemo(
