@@ -50,7 +50,7 @@ const PopPrice: React.FC<React.PropsWithChildren<Props>> = ({
       return '0x11c44AED3d69152486D92B3161696FcF38F84dB8' // 主网 WPOP 地址
     }
     if (chainId === ChainId.POPCHAIN_TESTNET) {
-      return '0x897FE3AFf41Dc5174504361926576ed2e5173F8D' // 测试网 WPOP 地址
+      return '0xd04c65bF21ef6609663Cc2B1B9F5E4c1bd22C428' // 测试网 WPOP 地址
     }
     return ''
   }, [chainId])

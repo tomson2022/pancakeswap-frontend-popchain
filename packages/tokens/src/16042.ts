@@ -3,7 +3,7 @@ import { ChainId, ERC20Token } from '@pancakeswap/sdk'
 export const popchainTokens = {
   wpop: new ERC20Token(
     ChainId.POPCHAIN_TESTNET,
-    '0x897FE3AFf41Dc5174504361926576ed2e5173F8D',
+    '0xd04c65bF21ef6609663Cc2B1B9F5E4c1bd22C428',
     18,
     'WPOP',
     'Wrapped POP',

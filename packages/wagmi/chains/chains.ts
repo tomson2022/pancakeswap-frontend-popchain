@@ -120,8 +120,8 @@ export const popchain: Chain = {
   name: 'PopChain Testnet',
   network: 'popchain-testnet',
   rpcUrls: {
-    default: 'https://testnet-node.popchain.ai',
-    public: 'https://testnet-node.popchain.ai',
+    default: 'https://testnet.popchain.ai',
+    public: 'https://testnet.popchain.ai',
   },
   nativeCurrency: {
     name: 'PopChain Token',
@@ -130,12 +130,12 @@ export const popchain: Chain = {
   },
   blockExplorers: {
     default: {
-      name: 'PopScan',
-      url: 'https://scan.popchain.org',
+      name: 'PopScan Testnet',
+      url: 'https://testnetpop.cloud.blockscout.com',
     },
   },
   multicall: {
-    address: '0x264fe686c002520E5c7E8018026C3BcdBf435a26',
+    address: '0x502A413621c82AB03AB4Db38A95f5d5E7AeF43E9',
     blockCreated: 1,
   },
   testnet: true,

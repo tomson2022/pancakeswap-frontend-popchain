@@ -14,7 +14,7 @@ const popchainLocalTokens: { [address: string]: string } = {
   '0xC6003142FD16Ad0b0A33B840173867CcDc2F4EC3': 'usdt', // USDT
   '0x5A108a944712A06E940cfe9590427190552d3957': 'luma', // LUMA
   // POPCHAIN 测试网 (16042)
-  '0x897FE3AFf41Dc5174504361926576ed2e5173F8D': 'wpop', // WPOP
+  '0xd04c65bF21ef6609663Cc2B1B9F5E4c1bd22C428': 'wpop', // WPOP
   '0x7faD4D267eD3820152afe42A99a2b95797504fA7': 'usdt', // USDT
 }
 
