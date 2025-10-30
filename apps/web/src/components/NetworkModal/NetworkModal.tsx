@@ -24,7 +24,7 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_POPCHAIN }: { 
   }, [pageSupportedChains])
 
   const isPageNotSupported = useMemo(
-    () => Boolean(pageSupportedChains.length) && !pageSupportedChains.includes(chainId),
+    () => Boolean(chainId) && Boolean(pageSupportedChains.length) && !pageSupportedChains.includes(chainId),
     [chainId, pageSupportedChains],
   )
 
