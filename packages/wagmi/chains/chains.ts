@@ -135,7 +135,7 @@ export const popchain: Chain = {
     },
   },
   multicall: {
-    address: '0x502A413621c82AB03AB4Db38A95f5d5E7AeF43E9',
+    address: '0x22B213dBDEf94Bc388b614987CE0146E84D4bbEe',
     blockCreated: 1,
   },
   testnet: true,

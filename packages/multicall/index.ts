@@ -12,7 +12,7 @@ export const multicallAddresses = {
   56: '0xcA11bde05977b3631167028862bE2a173976CA11',
   97: '0xcA11bde05977b3631167028862bE2a173976CA11',
   7257: '0xa1a1D2Ab028A84DBDdB614B5ec9c1A1905538ACe', // PopChain 主网 Multicall2
-  725700: '0x502A413621c82AB03AB4Db38A95f5d5E7AeF43E9', // PopChain 测试网 Multicall2
+  725700: '0x22B213dBDEf94Bc388b614987CE0146E84D4bbEe', // PopChain 测试网 Multicall2
 }
 
 export const getMulticallContract = (chainId: ChainId, provider: Provider) => {
