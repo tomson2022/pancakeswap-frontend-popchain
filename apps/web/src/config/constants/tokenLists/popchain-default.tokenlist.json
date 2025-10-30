@@ -38,7 +38,7 @@
       "name": "Wrapped POP",
       "symbol": "WPOP",
       "address": "0xd04c65bF21ef6609663Cc2B1B9F5E4c1bd22C428",
-      "chainId": 16042,
+      "chainId": 725700,
       "decimals": 18,
       "logoURI": "/images/tokens/wpop.png"
     },
@@ -46,7 +46,7 @@
       "name": "Tether USD",
       "symbol": "USDT",
       "address": "0x7faD4D267eD3820152afe42A99a2b95797504fA7",
-      "chainId": 16042,
+      "chainId": 725700,
       "decimals": 6,
       "logoURI": "/images/tokens/usdt.png"
     }

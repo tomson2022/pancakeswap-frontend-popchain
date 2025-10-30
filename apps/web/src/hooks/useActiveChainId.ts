@@ -43,7 +43,7 @@ export const useActiveChainId = () => {
   const getSmartDefaultChain = () => {
     const urlParams = new URLSearchParams(window.location.search)
     const urlChainId = urlParams.get('chainId')
-    if (urlChainId === '16042') {
+    if (urlChainId === '725700') {
       return ChainId.POPCHAIN_TESTNET
     }
     // 默认使用 PopChain 主网，包括没有 chainId 参数的情况

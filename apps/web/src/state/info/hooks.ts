@@ -226,7 +226,7 @@ export const useGetChainName = (): MultiChainName => {
       if (urlChainId === '1') {
         return 'ETH'
       }
-      if (urlChainId === '16042' || urlChainId === '7257') {
+      if (urlChainId === '725700' || urlChainId === '7257') {
         return 'POPCHAIN' // PopChain 主网和测试网都使用 'POPCHAIN'
       }
       // 默认使用 PopChain
@@ -236,7 +236,7 @@ export const useGetChainName = (): MultiChainName => {
     if (chainId === '1') {
       return 'ETH'
     }
-    if (chainId === '16042' || chainId === '7257') {
+    if (chainId === '725700' || chainId === '7257') {
       return 'POPCHAIN' // PopChain 主网和测试网都使用 'POPCHAIN'
     }
     // 默认使用 PopChain

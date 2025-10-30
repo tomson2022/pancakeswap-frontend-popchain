@@ -116,7 +116,7 @@ export const bscTest: Chain = {
 }
 
 export const popchain: Chain = {
-  id: 16042,
+  id: 725700,
   name: 'PopChain Testnet',
   network: 'popchain-testnet',
   rpcUrls: {
