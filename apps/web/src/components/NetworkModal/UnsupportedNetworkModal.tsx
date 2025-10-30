@@ -17,7 +17,7 @@ export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupported
   const { switchNetworkAsync, isLoading, canSwitch } = useSwitchNetwork()
   const switchNetworkLocal = useSwitchNetworkLocal()
   const { chains } = useNetwork()
-  const chainId = useLocalNetworkChain() || ChainId.BSC
+  const chainId = useLocalNetworkChain() || ChainId.POPCHAIN
   const { isConnected } = useAccount()
   const { logout } = useAuth()
   const { t } = useTranslation()
@@ -31,8 +31,8 @@ export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupported
     return activeSubMenuItem?.label || activeMenuItem?.label
   }, [menuItems, pathname])
 
-  const supportedMainnetChains = useMemo(
-    () => chains.filter((chain) => !chain.testnet && pageSupportedChains?.includes(chain.id)),
+  const supportedChains = useMemo(
+    () => chains.filter((chain) => pageSupportedChains?.includes(chain.id)),
     [chains, pageSupportedChains],
   )
 
@@ -41,7 +41,7 @@ export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupported
       <Grid style={{ gap: '16px' }} maxWidth="336px">
         <Text>
           {t('Currently %feature% only supported in', { feature: typeof title === 'string' ? title : 'this page' })}{' '}
-          {supportedMainnetChains?.map((c) => c.name).join(', ')}
+          {supportedChains?.map((c) => c.name).join(', ')}
         </Text>
         <div style={{ textAlign: 'center' }}>
           <Image
@@ -59,10 +59,11 @@ export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupported
           <Button
             isLoading={isLoading}
             onClick={() => {
-              if (supportedMainnetChains.map((c) => c.id).includes(chainId)) {
+              if (supportedChains.map((c) => c.id).includes(chainId)) {
                 switchNetworkAsync(chainId)
               } else {
-                switchNetworkAsync(ChainId.BSC)
+                // 默认切换到 PopChain 主网
+                switchNetworkAsync(ChainId.POPCHAIN)
               }
             }}
           >
@@ -78,7 +79,7 @@ export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupported
             variant="secondary"
             onClick={() =>
               logout().then(() => {
-                switchNetworkLocal(ChainId.BSC)
+                switchNetworkLocal(ChainId.POPCHAIN)
               })
             }
           >
