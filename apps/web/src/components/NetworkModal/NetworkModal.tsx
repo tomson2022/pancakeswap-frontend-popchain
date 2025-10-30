@@ -28,6 +28,18 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_POPCHAIN }: { 
     [chainId, pageSupportedChains],
   )
 
+  // 只有当钱包连接的链不在页面支持列表中时才显示 WrongNetworkModal
+  // 如果钱包连接的是 PopChain 主网或测试网（都在支持列表中），就不显示错误
+  // 注意：这个 useMemo 必须在所有条件性 return 之前调用，以遵循 React Hooks 规则
+  const shouldShowWrongNetworkModal = useMemo(() => {
+    if (!isWrongNetwork || dismissWrongNetwork || !chain) return false
+    // 如果钱包连接的链在支持列表中，不显示错误
+    if (pageSupportedChains.includes(chain.id)) return false
+    return true
+  }, [isWrongNetwork, dismissWrongNetwork, chain, pageSupportedChains])
+
+  const currentChain = useMemo(() => chains.find((c) => c.id === chainId), [chains, chainId])
+
   if (isPageNotSupported && isPopChainOnlyPage) {
     return (
       <ModalV2 isOpen closeOnOverlayClick={false}>
@@ -44,18 +56,7 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_POPCHAIN }: { 
     )
   }
 
-  // 只有当钱包连接的链不在页面支持列表中时才显示 WrongNetworkModal
-  // 如果钱包连接的是 PopChain 主网或测试网（都在支持列表中），就不显示错误
-  const shouldShowWrongNetworkModal = useMemo(() => {
-    if (!isWrongNetwork || dismissWrongNetwork || !chain) return false
-    // 如果钱包连接的链在支持列表中，不显示错误
-    if (pageSupportedChains.includes(chain.id)) return false
-    return true
-  }, [isWrongNetwork, dismissWrongNetwork, chain, pageSupportedChains])
-
-  if (shouldShowWrongNetworkModal) {
-    const currentChain = chains.find((c) => c.id === chainId)
-    if (!currentChain) return null
+  if (shouldShowWrongNetworkModal && currentChain) {
     return (
       <ModalV2 isOpen closeOnOverlayClick onDismiss={() => setDismissWrongNetwork(true)}>
         <WrongNetworkModal currentChain={currentChain} onDismiss={() => setDismissWrongNetwork(true)} />
