@@ -35,8 +35,10 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_POPCHAIN }: { 
     if (!isWrongNetwork || dismissWrongNetwork || !chain) return false
     // 如果钱包连接的链在支持列表中，不显示错误
     if (pageSupportedChains.includes(chain.id)) return false
+    // 如果 chainId 也在支持列表中，不显示错误（避免短暂的不同步）
+    if (chainId && pageSupportedChains.includes(chainId)) return false
     return true
-  }, [isWrongNetwork, dismissWrongNetwork, chain, pageSupportedChains])
+  }, [isWrongNetwork, dismissWrongNetwork, chain, chainId, pageSupportedChains])
 
   const currentChain = useMemo(() => chains.find((c) => c.id === chainId), [chains, chainId])
 

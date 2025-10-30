@@ -54,9 +54,16 @@ export const useActiveChainId = () => {
 
   const isNotMatched = useDeferredValue(chain && localChainId && chain.id !== localChainId)
 
+  // 检查是否是 PopChain 链之间的切换（主网和测试网）
+  // 如果钱包和 URL 都是 PopChain 相关链，允许不匹配（用户可以自由切换）
+  const popChainIds = [ChainId.POPCHAIN, ChainId.POPCHAIN_TESTNET]
+  const isPopChainSwitch = chain && localChainId && 
+    popChainIds.includes(chain.id) && popChainIds.includes(localChainId)
+
   return {
     chainId,
-    isWrongNetwork: (chain?.unsupported ?? false) || isNotMatched,
+    // 如果是 PopChain 主网和测试网之间的切换，不认为是错误网络
+    isWrongNetwork: (chain?.unsupported ?? false) || (isNotMatched && !isPopChainSwitch),
     isNotMatched,
   }
 }
