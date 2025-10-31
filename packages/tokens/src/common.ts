@@ -127,7 +127,7 @@ export const BUSD_GOERLI = new ERC20Token(
 const BUSD_POPCHAIN_TESTNET = new ERC20Token(
   ChainId.POPCHAIN_TESTNET,
   '0x9373ee592e140058DfF4A956D67159D1c91b12B3', // 测试网 USDT 地址
-  6,
+  18,
   'USDT',
   'Tether USD',
   'https://tether.to'
@@ -162,7 +162,7 @@ export const CAKE = {
 const USDC_POPCHAIN_TESTNET = new ERC20Token(
   ChainId.POPCHAIN_TESTNET,
   '0x9373ee592e140058DfF4A956D67159D1c91b12B3',
-  6,
+  18,
   'USDT',
   'Tether USD',
   'https://tether.to'
@@ -192,7 +192,7 @@ export const USDC = {
 const USDT_POPCHAIN_TESTNET = new ERC20Token(
   ChainId.POPCHAIN_TESTNET,
   '0x9373ee592e140058DfF4A956D67159D1c91b12B3',
-  6,
+  18,
   'USDT',
   'Tether USD',
   'https://tether.to'
