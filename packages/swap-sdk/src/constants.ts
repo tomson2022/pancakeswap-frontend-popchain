@@ -32,8 +32,8 @@ export const INIT_CODE_HASH_MAP: Record<number, string> = {
   [ChainId.GOERLI]: INIT_CODE_HASH_ETH,
   [ChainId.BSC]: INIT_CODE_HASH,
   [ChainId.BSC_TESTNET]: '0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66',
-  [ChainId.POPCHAIN]: '0xefee83905acdae3ba6183cb5c058311536b86ef082ec213a50270f068af21b61', // PopChain 主网使用相同的 INIT_CODE
-  [ChainId.POPCHAIN_TESTNET]: '0xefee83905acdae3ba6183cb5c058311536b86ef082ec213a50270f068af21b61',
+  [ChainId.POPCHAIN]: '0xefee83905acdae3ba6183cb5c058311536b86ef082ec213a50270f068af21b61', // PopChain 主网 INIT_CODE
+  [ChainId.POPCHAIN_TESTNET]: '0xdf5f44cb87ffe0249e927229179c1c81d0ea3de41a436c531cacddd921368d0b', // PopChain 测试网 INIT_CODE
 }
 
 export const WETH9 = {
