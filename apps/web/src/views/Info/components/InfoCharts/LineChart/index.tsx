@@ -67,14 +67,16 @@ const LineChart = ({ data, setHoverValue, setHoverDate }: LineChartProps) => {
           cursor={{ stroke: theme.colors.secondary }}
           contentStyle={{ display: 'none' }}
           formatter={(tooltipValue, name, props) => {
-            setHoverValue(props.payload.value)
-            setHoverDate(
-              props.payload.time.toLocaleString(locale, {
-                year: 'numeric',
-                day: 'numeric',
-                month: 'short',
-              }),
-            )
+            queueMicrotask(() => {
+              setHoverValue(props.payload.value)
+              setHoverDate(
+                props.payload.time.toLocaleString(locale, {
+                  year: 'numeric',
+                  day: 'numeric',
+                  month: 'short',
+                }),
+              )
+            })
             return null
           }}
         />

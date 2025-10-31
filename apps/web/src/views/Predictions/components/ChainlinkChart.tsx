@@ -247,7 +247,9 @@ const Chart = ({
           cursor={{ stroke: theme.colors.textSubtle, strokeDasharray: '3 3' }}
           contentStyle={{ display: 'none' }}
           formatter={(tooltipValue, name, props) => {
-            mutate(props.payload)
+            queueMicrotask(() => {
+              mutate(props.payload)
+            })
             return null
           }}
         />

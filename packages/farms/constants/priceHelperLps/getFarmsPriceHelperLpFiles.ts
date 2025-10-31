@@ -3,6 +3,8 @@ import FarmsBscPriceHelper from './56'
 import FarmsBscTestnetPriceHelper from './97'
 import FarmsEthereumPriceHelper from './1'
 import FarmsGoerliPriceHelper from './5'
+import FarmsPopChainPriceHelper from './7257'
+import FarmsPopChainTestnetPriceHelper from './725700'
 
 export const getFarmsPriceHelperLpFiles = (chainId: ChainId) => {
   switch (chainId) {
@@ -14,6 +16,10 @@ export const getFarmsPriceHelperLpFiles = (chainId: ChainId) => {
       return FarmsEthereumPriceHelper
     case ChainId.GOERLI:
       return FarmsGoerliPriceHelper
+    case ChainId.POPCHAIN:
+      return FarmsPopChainPriceHelper
+    case ChainId.POPCHAIN_TESTNET:
+      return FarmsPopChainTestnetPriceHelper
     default:
       return []
   }
