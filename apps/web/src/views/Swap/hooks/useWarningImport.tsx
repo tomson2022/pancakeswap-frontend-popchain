@@ -37,7 +37,7 @@ export default function useWarningImport() {
   const importTokensNotInDefault =
     !isWrongNetwork && urlLoadedTokens
       ? urlLoadedTokens.filter((token: Token) => {
-          return !(token.address in defaultTokens) && token.chainId === chainId
+          return token && !(token.address in defaultTokens) && token.chainId === chainId
         })
       : []
 

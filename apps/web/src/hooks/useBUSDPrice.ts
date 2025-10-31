@@ -118,7 +118,7 @@ export const usePriceByPairs = (currencyA?: Currency, currencyB?: Currency) => {
   const [tokenA, tokenB] = [currencyA?.wrapped, currencyB?.wrapped]
   const pairAddress = getLpAddress(tokenA, tokenB)
   const pairContract = usePairContract(pairAddress)
-  const provider = useProvider({ chainId: currencyA.chainId })
+  const provider = useProvider({ chainId: currencyA?.chainId })
 
   const { data: price } = useSWR(
     currencyA && currencyB && ['pair-price', currencyA, currencyB],
