@@ -45,7 +45,7 @@
     {
       "name": "Tether USD",
       "symbol": "USDT",
-      "address": "0x7faD4D267eD3820152afe42A99a2b95797504fA7",
+      "address": "0x9373ee592e140058DfF4A956D67159D1c91b12B3",
       "chainId": 725700,
       "decimals": 6,
       "logoURI": "/images/tokens/usdt.png"

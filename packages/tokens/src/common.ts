@@ -126,7 +126,7 @@ export const BUSD_GOERLI = new ERC20Token(
 // PopChain 测试网没有 BUSD，使用 USDT 作为稳定币
 const BUSD_POPCHAIN_TESTNET = new ERC20Token(
   ChainId.POPCHAIN_TESTNET,
-  '0x7faD4D267eD3820152afe42A99a2b95797504fA7', // 测试网 USDT 地址
+  '0x9373ee592e140058DfF4A956D67159D1c91b12B3', // 测试网 USDT 地址
   6,
   'USDT',
   'Tether USD',
@@ -161,7 +161,7 @@ export const CAKE = {
 // PopChain 测试网 USDC (使用 USDT 地址)
 const USDC_POPCHAIN_TESTNET = new ERC20Token(
   ChainId.POPCHAIN_TESTNET,
-  '0x7faD4D267eD3820152afe42A99a2b95797504fA7',
+  '0x9373ee592e140058DfF4A956D67159D1c91b12B3',
   6,
   'USDT',
   'Tether USD',
@@ -191,7 +191,7 @@ export const USDC = {
 // PopChain 测试网 USDT
 const USDT_POPCHAIN_TESTNET = new ERC20Token(
   ChainId.POPCHAIN_TESTNET,
-  '0x7faD4D267eD3820152afe42A99a2b95797504fA7',
+  '0x9373ee592e140058DfF4A956D67159D1c91b12B3',
   6,
   'USDT',
   'Tether USD',

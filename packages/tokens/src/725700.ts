@@ -11,7 +11,7 @@ export const popchainTokens = {
   ),
   usdt: new ERC20Token(
     ChainId.POPCHAIN_TESTNET,
-    '0x7faD4D267eD3820152afe42A99a2b95797504fA7',
+    '0x9373ee592e140058DfF4A956D67159D1c91b12B3',
     6,
     'USDT',
     'Tether USD',
