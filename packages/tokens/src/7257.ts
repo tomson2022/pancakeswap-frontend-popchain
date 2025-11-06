@@ -17,6 +17,14 @@ export const popchainMainnetTokens = {
     'Tether USD',
     'https://tether.to'
   ),
+  usdc: new ERC20Token(
+    ChainId.POPCHAIN,
+    '0x23E535391Ab0fbb0C897f2264ad8EE26BBa65624',
+    6,
+    'USDC',
+    'USD Coin',
+    'https://www.circle.com/usdc'
+  ),
   luma: new ERC20Token(
     ChainId.POPCHAIN,
     '0x5A108a944712A06E940cfe9590427190552d3957',

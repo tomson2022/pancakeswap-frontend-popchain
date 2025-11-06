@@ -27,6 +27,14 @@
       "logoURI": "/images/tokens/usdt.png"
     },
     {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "address": "0x23E535391Ab0fbb0C897f2264ad8EE26BBa65624",
+      "chainId": 7257,
+      "decimals": 6,
+      "logoURI": "/images/tokens/usdc.png"
+    },
+    {
       "name": "Luma Protocol",
       "symbol": "LUMA",
       "address": "0x5A108a944712A06E940cfe9590427190552d3957",

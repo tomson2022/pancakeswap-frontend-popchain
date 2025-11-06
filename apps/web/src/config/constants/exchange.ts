@@ -28,7 +28,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     bscTokens.usdc,
   ],
   [ChainId.BSC_TESTNET]: [bscTokens.wbnb, bscTokens.cake, bscTokens.busd],
-  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.luma], // PopChain 主网交易基础代币
+  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma], // PopChain 主网交易基础代币
   [ChainId.POPCHAIN_TESTNET]: [popchainTokens.wpop, popchainTokens.usdt],
 }
 
@@ -59,7 +59,7 @@ export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.GOERLI]: [USDC[ChainId.GOERLI], WNATIVE[ChainId.GOERLI], USDT[ChainId.GOERLI]],
   [ChainId.BSC]: [bscTokens.busd, bscTokens.cake, bscTokens.btcb],
   [ChainId.BSC_TESTNET]: [bscTokens.wbnb, bscTokens.cake, bscTokens.busd],
-  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.luma], // PopChain 主网常用代币
+  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma], // PopChain 主网常用代币
   [ChainId.POPCHAIN_TESTNET]: [popchainTokens.wpop, popchainTokens.usdt],
 }
 
@@ -70,7 +70,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.GOERLI]: [USDC[ChainId.GOERLI], WNATIVE[ChainId.GOERLI], USDT[ChainId.GOERLI]],
   [ChainId.BSC]: [bscTokens.wbnb, bscTokens.dai, bscTokens.busd, bscTokens.usdt, bscTokens.cake],
   [ChainId.BSC_TESTNET]: [bscTokens.wbnb, bscTokens.cake, bscTokens.busd],
-  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.luma], // PopChain 主网流动性跟踪
+  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma], // PopChain 主网流动性跟踪
   [ChainId.POPCHAIN_TESTNET]: [popchainTokens.wpop, popchainTokens.usdt],
 }
 
@@ -86,7 +86,9 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [bscTokens.dai, bscTokens.usdt],
   ],
   [ChainId.POPCHAIN]: [
-    [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt], // WPOP/USDT 主要交易对
+    [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt], // WPOP/USDT 主要交易对（默认）
+    [popchainMainnetTokens.wpop, popchainMainnetTokens.usdc], // WPOP/USDC 交易对
+    [popchainMainnetTokens.usdt, popchainMainnetTokens.usdc], // USDT/USDC 稳定币交易对
     [popchainMainnetTokens.wpop, popchainMainnetTokens.luma], // WPOP/LUMA 交易对
     [popchainMainnetTokens.usdt, popchainMainnetTokens.luma], // USDT/LUMA 交易对
   ],

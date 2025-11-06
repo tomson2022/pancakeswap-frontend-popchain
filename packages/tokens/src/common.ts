@@ -168,14 +168,14 @@ const USDC_POPCHAIN_TESTNET = new ERC20Token(
   'https://tether.to'
 )
 
-// PopChain 主网 USDC (使用 USDT 地址)
+// PopChain 主网 USDC
 const USDC_POPCHAIN_MAINNET = new ERC20Token(
   ChainId.POPCHAIN,
-  '0xC6003142FD16Ad0b0A33B840173867CcDc2F4EC3',
-  18,
-  'USDT',
-  'Tether USD',
-  'https://tether.to'
+  '0x23E535391Ab0fbb0C897f2264ad8EE26BBa65624',
+  6,
+  'USDC',
+  'USD Coin',
+  'https://www.circle.com/usdc'
 )
 
 export const USDC = {
@@ -184,7 +184,7 @@ export const USDC = {
   [ChainId.ETHEREUM]: USDC_ETH,
   [ChainId.RINKEBY]: USDC_RINKEBY,
   [ChainId.GOERLI]: USDC_GOERLI,
-  [ChainId.POPCHAIN]: USDC_POPCHAIN_MAINNET, // PopChain 主网使用 USDT
+  [ChainId.POPCHAIN]: USDC_POPCHAIN_MAINNET, // PopChain 主网 USDC
   [ChainId.POPCHAIN_TESTNET]: USDC_POPCHAIN_TESTNET, // PopChain 测试网使用 USDT
 }
 
