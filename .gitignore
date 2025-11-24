@@ -50,3 +50,7 @@ debug.log*
 # turbo
 .turbo
 .vercel
+
+.git-push-helper.sh
+.git-push-helper.sh.backup*
+.git-push-config.md.backup*

@@ -33,4 +33,12 @@ export const popchainMainnetTokens = {
     'Luma Protocol',
     'https://luma.fi'
   ),
+  pf: new ERC20Token(
+    ChainId.POPCHAIN,
+    '0xd68DAEe70de4c035768C3013bcd03814AE0BE53f',
+    18,
+    'PF',
+    'PF Token',
+    'https://popchain.ai'
+  ),
 }

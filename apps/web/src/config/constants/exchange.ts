@@ -28,7 +28,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     bscTokens.usdc,
   ],
   [ChainId.BSC_TESTNET]: [bscTokens.wbnb, bscTokens.cake, bscTokens.busd],
-  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma], // PopChain 主网交易基础代币
+  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma, popchainMainnetTokens.pf], // PopChain 主网交易基础代币
   [ChainId.POPCHAIN_TESTNET]: [popchainTokens.wpop, popchainTokens.usdt],
 }
 
@@ -59,7 +59,7 @@ export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.GOERLI]: [USDC[ChainId.GOERLI], WNATIVE[ChainId.GOERLI], USDT[ChainId.GOERLI]],
   [ChainId.BSC]: [bscTokens.busd, bscTokens.cake, bscTokens.btcb],
   [ChainId.BSC_TESTNET]: [bscTokens.wbnb, bscTokens.cake, bscTokens.busd],
-  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma], // PopChain 主网常用代币
+  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma, popchainMainnetTokens.pf], // PopChain 主网常用代币
   [ChainId.POPCHAIN_TESTNET]: [popchainTokens.wpop, popchainTokens.usdt],
 }
 
@@ -70,7 +70,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.GOERLI]: [USDC[ChainId.GOERLI], WNATIVE[ChainId.GOERLI], USDT[ChainId.GOERLI]],
   [ChainId.BSC]: [bscTokens.wbnb, bscTokens.dai, bscTokens.busd, bscTokens.usdt, bscTokens.cake],
   [ChainId.BSC_TESTNET]: [bscTokens.wbnb, bscTokens.cake, bscTokens.busd],
-  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma], // PopChain 主网流动性跟踪
+  [ChainId.POPCHAIN]: [popchainMainnetTokens.wpop, popchainMainnetTokens.usdt, popchainMainnetTokens.usdc, popchainMainnetTokens.luma, popchainMainnetTokens.pf], // PopChain 主网流动性跟踪
   [ChainId.POPCHAIN_TESTNET]: [popchainTokens.wpop, popchainTokens.usdt],
 }
 

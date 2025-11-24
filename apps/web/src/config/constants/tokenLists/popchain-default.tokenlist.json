@@ -43,6 +43,14 @@
       "logoURI": "/images/tokens/luma.png"
     },
     {
+      "name": "PF Token",
+      "symbol": "PF",
+      "address": "0xd68DAEe70de4c035768C3013bcd03814AE0BE53f",
+      "chainId": 7257,
+      "decimals": 18,
+      "logoURI": "/images/tokens/0xd68DAEe70de4c035768C3013bcd03814AE0BE53f.png"
+    },
+    {
       "name": "Wrapped POP",
       "symbol": "WPOP",
       "address": "0xd04c65bF21ef6609663Cc2B1B9F5E4c1bd22C428",
